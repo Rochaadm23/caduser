@@ -26,7 +26,6 @@ public class UserService {
     }
 
     public User findById(Long id) {
-
         Optional<User> obj = userRepositorie.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
