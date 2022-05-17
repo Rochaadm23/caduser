@@ -2,8 +2,11 @@ package com.rsecinformation.caduser.services;
 
 import com.rsecinformation.caduser.entities.User;
 import com.rsecinformation.caduser.repositories.UserRepositorie;
+import com.rsecinformation.caduser.services.exceptions.DatabaseException;
 import com.rsecinformation.caduser.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +35,17 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        userRepositorie.deleteById(id);
+        try {
+            userRepositorie.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj) {
-        User entity = userRepositorie.getOne(id);
+        User entity = userRepositorie.getById(id);
         updateData(entity, obj);
         return userRepositorie.save(entity);
     }
