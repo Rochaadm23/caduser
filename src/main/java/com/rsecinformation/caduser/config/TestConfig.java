@@ -1,4 +1,4 @@
-package com.rsecinformation.caduser.config;
+/*package com.rsecinformation.caduser.config;
 
 import com.rsecinformation.caduser.entities.User;
 import com.rsecinformation.caduser.repositories.UserRepositorie;
@@ -24,3 +24,4 @@ public class TestConfig implements CommandLineRunner {
         userRepositorie.saveAll(Arrays.asList(u1, u2));
     }
 }
+*/
