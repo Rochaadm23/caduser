@@ -1,5 +1,6 @@
 package com.rsecinformation.caduser.services;
 
+import com.rsecinformation.caduser.dto.UserDTO;
 import com.rsecinformation.caduser.entities.User;
 import com.rsecinformation.caduser.repositories.UserRepositorie;
 import com.rsecinformation.caduser.services.exceptions.DatabaseException;
@@ -58,5 +59,9 @@ public class UserService {
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
         entity.setPhone(obj.getPhone());
+    }
+
+    public User fromDTO(UserDTO objDto){
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), objDto.getPhone(), objDto.getPassword());
     }
 }
